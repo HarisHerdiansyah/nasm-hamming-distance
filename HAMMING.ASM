@@ -104,7 +104,6 @@ num_to_ascii:
     mov [similarity_val], al
     add dl, '0'
     mov [similarity_val + 1], dl
-    ; Salin ke total_char_val juga
     mov [total_char_val], al
     mov [total_char_val + 1], dl
     ret
@@ -116,19 +115,13 @@ section .data
     buffer_str1: db 80, 0
                  times 80 db 0
 
-    echo_str1: db 'Input string 1: $'
-
     prompt_str2: db 'Masukkan Jawaban yang Akan Diperiksa: $'
     buffer_str2: db 80, 0
                  times 80 db 0
 
-    echo_str2: db 'Input string 2: $'
-
     len_mismatch_msg: db 'Panjang input tidak sama. Program dihentikan.$'
-    similarity_msg: db 'Perbandingan Jawaban: $'
+    similarity_msg: db 'Jawaban Benar: $'
     similarity_val: db '00$'
-
-    total_char_msg: db 'Total karakter: $'
     total_char_val: db '00$'
 	
-	separator: db ' / $'
+    separator: db '/$'
