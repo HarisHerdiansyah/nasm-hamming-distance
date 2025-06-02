@@ -18,17 +18,6 @@ start:
     jne length_not_same
 
     call new_line
-    mov dx, echo_str1
-    call output_str
-    mov dx, buffer_str1 + 2
-    call output_str
-    call new_line
-    mov dx, echo_str2
-    call output_str
-    mov dx, buffer_str2 + 2
-    call output_str
-    call new_line
-
     mov cl, [buffer_str1 + 1]
     xor bx, bx
     lea si, [buffer_str1 + 2]
@@ -47,10 +36,17 @@ skip_inc:
 
     mov ax, bx
     call num_to_ascii
-
     mov dx, similarity_msg
     call output_str
     mov dx, similarity_val
+    call output_str
+	mov dx, separator
+	call output_str
+
+    mov al, [buffer_str1 + 1]
+    xor ah, ah
+    call num_to_ascii
+    mov dx, total_char_val
     call output_str
     call new_line
 
@@ -108,6 +104,9 @@ num_to_ascii:
     mov [similarity_val], al
     add dl, '0'
     mov [similarity_val + 1], dl
+    ; Salin ke total_char_val juga
+    mov [total_char_val], al
+    mov [total_char_val + 1], dl
     ret
 
 ; --------------------------------------
@@ -126,5 +125,10 @@ section .data
     echo_str2: db 'Input string 2: $'
 
     len_mismatch_msg: db 'Panjang input tidak sama. Program dihentikan.$'
-    similarity_msg: db 'Jumlah karakter yang sama: $'
+    similarity_msg: db 'Perbandingan Jawaban: $'
     similarity_val: db '00$'
+
+    total_char_msg: db 'Total karakter: $'
+    total_char_val: db '00$'
+	
+	separator: db ' / $'
