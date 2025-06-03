@@ -82,6 +82,7 @@ read_str:
 
 new_line:
     push dx
+	;yg ini khusus
     mov ah, 02h
     mov dl, 0Dh
     int 21h
